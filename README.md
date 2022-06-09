@@ -19,3 +19,9 @@ FLEXPART and reduced-resolution wind fields, we demonstrate that absolute horizo
 deviations of calculated trajectories from "ground-truth" trajectories calculated with undegraded
 high-resolution winds are reduced by XXX% relative to trajectories using linear interpolation of the
 wind data.
+
+
+# About this repository 
+
+Once the manuscript ([link](https://arxiv.org/abs/2206.04015)) is accapted, we will upload the code to train the neural networks.
+For now, the code in this repository reproduces the plots from the manuscript. To run the jupyter notebook you need to download the data from [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.6628749.svg)](https://doi.org/10.5281/zenodo.6628749).
