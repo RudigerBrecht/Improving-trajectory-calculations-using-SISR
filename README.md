@@ -21,7 +21,34 @@ high-resolution winds are reduced by XXX% relative to trajectories using linear 
 wind data.
 
 
-# About this repository 
+# Preprint
 
-Once the manuscript ([link](https://arxiv.org/abs/2206.04015)) is accapted, we will upload the code to train the neural networks.
-For now, the code in this repository reproduces the plots from the manuscript. To run the jupyter notebook you need to download the data from [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.6628749.svg)](https://doi.org/10.5281/zenodo.6628749).
+For the manuscript see ([link](https://arxiv.org/abs/2206.04015)).
+
+# Reproducing the results
+
+1. Download the ERA 5 data using the scripts in the folder *download_era5_data*.
+
+2. Normalize the downloaded data using the scripts in the folder *preprocess_data*.
+
+3. Train the neural networks using the scripts in the folder *train_neural_networks*.
+
+4. To interpolate the data first copy the evaluation data as follows:
+```
+cp /download_era5_data/eval_u.nc /interpolate_data/nn_eval_u_m1.nc
+cp /download_era5_data/eval_v.nc /interpolate_data/nn_eval_v_m1.nc
+
+cp /download_era5_data/eval_u.nc /interpolate_data/nn_eval_u_m2.nc
+cp /download_era5_data/eval_v.nc /interpolate_data/nn_eval_v_m2.nc
+
+cp /download_era5_data/eval_u.nc /interpolate_data/nn_eval_u_m4.nc
+cp /download_era5_data/eval_v.nc /interpolate_data/nn_eval_v_m4.nc
+
+cp /download_era5_data/eval_u.nc /interpolate_data/lin_eval_u.nc
+cp /download_era5_data/eval_v.nc /interpolate_data/lin_eval_v.nc
+```
+Then interpolate the data using the scripts in the folder *interpolate_data*.
+
+5. Evaluate the interpolated data using the scripts in the folder *evaluate_interpolation*
+
+6. Plot the resluts using the jupyter notebook with the data from [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.6628749.svg)](https://doi.org/10.5281/zenodo.6628749).
