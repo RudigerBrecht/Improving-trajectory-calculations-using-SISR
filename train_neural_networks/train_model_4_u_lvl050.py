@@ -148,4 +148,4 @@ print('start training')
 model.fit(ds_train, epochs=25, validation_data=ds_val, callbacks=[tf.keras.callbacks.ReduceLROnPlateau(patience=2, verbose = 1)])
 
 ##
-model.save('trained_nn_models/model_4_u_lvl050')
+model.save('../trained_nn_models/model_4_u_lvl050')
