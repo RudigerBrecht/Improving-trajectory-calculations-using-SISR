@@ -27,7 +27,11 @@ For the manuscript see ([link](https://arxiv.org/abs/2206.04015)).
 
 # Reproducing the results
 
-1. Download the ERA 5 data using the scripts in the folder *download_era5_data*.
+1. Download the ERA5 re-analysis data from the Copernicus Climate
+Change Service (C3S) Climate Data Store. The results contain modified Copernicus Climate Change Service information. Neither the European Commission nor ECMWF is responsible for any use that may be made of the Copernicus information
+or data it contains.
+We used flex_extract to download the ERA5 re-analysis data. The documentation can be found here
+(https://www.flexpart.eu/flex_extract/ecmwf_data.html).
 
 2. Normalize the downloaded data using the scripts in the folder *preprocess_data*.
 
