@@ -55,6 +55,6 @@ Then interpolate the data using the scripts in the folder *interpolate_data*.
 
 5. Evaluate the interpolated data using the scripts in the folder *evaluate_interpolation*
 
-6. Then we used the Lagrangian transport and dispersion model FLEXPART ([link](https://www.flexpart.eu/)) to advect particles on the interpolated data.
+6. Then we used the Lagrangian transport and dispersion model FLEXPART 10.4 ([link](https://www.flexpart.eu/)) to advect particles on the interpolated data. We switched off all turbulence and convection parameterizations and used FLEXPART as a simple trajectory model.
 
 7. Plot the resluts using the jupyter notebook with the data from [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.6628749.svg)](https://doi.org/10.5281/zenodo.6628749).
