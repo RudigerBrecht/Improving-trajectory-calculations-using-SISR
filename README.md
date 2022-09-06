@@ -23,7 +23,7 @@ wind data.
 
 # Preprint
 
-For the manuscript see ([link](https://arxiv.org/abs/2206.04015)).
+For the manuscript see ([link](https://egusphere.copernicus.org/preprints/2022/egusphere-2022-441/)).
 
 # Reproducing the results
 
