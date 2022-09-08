@@ -50,21 +50,15 @@ modelv4_050 = tf.keras.models.load_model('../trained_nn_models/model_4_v_lvl050'
 modelv4_50137 = tf.keras.models.load_model('../trained_nn_models/model_4_v_lvl50137')
 
 ###
-ds_u_ref = nc.Dataset('../download_era5_data/eval_u.nc')
-ds_v_ref = nc.Dataset('../download_era5_data/eval_v.nc')
-uref=ds_u_ref['u'][0:136, 0:360,0:720,0:24]
-vref=ds_v_ref['v'][0:136, 0:360,0:720,0:24]
+ds_ref = nc.Dataset('wind_orig_20000113140000.nc')
+uref=ds_ref['u'][0:136, 0:360,0:720,0:24]
+vref=ds_ref['v'][0:136, 0:360,0:720,0:24]
 
 ###
-rmse_u_lin=[0,0,0]
-rmse_u_nn4=[0,0,0]
-rmse_u_nn2=[0,0]
-rmse_u_nn1=0
-
-rmse_v_lin=[0,0,0]
-rmse_v_nn4=[0,0,0]
-rmse_v_nn2=[0,0]
-rmse_v_nn1=0
+rmse_lin=[0,0,0]
+rmse_nn4=[0,0,0]
+rmse_nn2=[0,0]
+rmse_nn1=0
 
 ssim_u_lin=[0,0,0]
 ssim_u_nn4=[0,0,0]
@@ -183,25 +177,3 @@ np.save('ssim_v_lin',ssim_v_lin)
 np.save('ssim_v_nn4',ssim_v_nn4)
 np.save('ssim_v_nn2',ssim_v_nn2)
 np.save('ssim_v_nn1',ssim_v_nn1)
-
-
-
-rmse_u_lin=[0,0,0]
-rmse_u_nn4=[0,0,0]
-rmse_u_nn2=[0,0]
-rmse_u_nn1=0
-
-rmse_v_lin=[0,0,0]
-rmse_v_nn4=[0,0,0]
-rmse_v_nn2=[0,0]
-rmse_v_nn1=0
-
-ssim_u_lin=[0,0,0]
-ssim_u_nn4=[0,0,0]
-ssim_u_nn2=[0,0]
-ssim_u_nn1=0
-
-ssim_v_lin=[0,0,0]
-ssim_v_nn4=[0,0,0]
-ssim_v_nn2=[0,0]
-ssim_v_nn1=0
