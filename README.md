@@ -39,17 +39,15 @@ We used flex_extract to download the ERA5 re-analysis data. The documentation ca
 
 4. To interpolate the data first copy the evaluation data as follows:
 ```
-cp /download_era5_data/eval_u.nc /interpolate_data/nn_eval_u_m1.nc
-cp /download_era5_data/eval_v.nc /interpolate_data/nn_eval_v_m1.nc
+cp wind_orig_20000113140000.nc /interpolate_data/nn_wind_orig_20000113140000.nc
+cp wind_orig_20000113140000.nc /interpolate_data/nn_wind_orig_20000413050000.nc
+cp wind_orig_20000116170000.nc /interpolate_data/nn_wind_orig_20000712200000.nc
+cp wind_orig_20000119200000.nc /interpolate_data/nn_wind_orig_20001014140000.nc
 
-cp /download_era5_data/eval_u.nc /interpolate_data/nn_eval_u_m2.nc
-cp /download_era5_data/eval_v.nc /interpolate_data/nn_eval_v_m2.nc
-
-cp /download_era5_data/eval_u.nc /interpolate_data/nn_eval_u_m4.nc
-cp /download_era5_data/eval_v.nc /interpolate_data/nn_eval_v_m4.nc
-
-cp /download_era5_data/eval_u.nc /interpolate_data/lin_eval_u.nc
-cp /download_era5_data/eval_v.nc /interpolate_data/lin_eval_v.nc
+cp wind_orig_20000113140000.nc /interpolate_data/lin_wind_orig_20000113140000.nc
+cp wind_orig_20000113140000.nc /interpolate_data/lin_wind_orig_20000413050000.nc
+cp wind_orig_20000116170000.nc /interpolate_data/lin_wind_orig_20000712200000.nc
+cp wind_orig_20000119200000.nc /interpolate_data/lin_wind_orig_20001014140000.nc
 ```
 Then interpolate the data using the scripts in the folder *interpolate_data*.
 
