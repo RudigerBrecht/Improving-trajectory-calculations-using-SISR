@@ -14,6 +14,8 @@ from scipy import interpolate
 
 ###
 
+filenames=['wind_orig_20000113140000.nc','wind_orig_20000413050000.nc','wind_orig_20000712200000.nc','wind_orig_20001014140000']
+
 x = np.arange(0,360, 2)
 y = np.arange(0,720, 2)
 
@@ -23,40 +25,44 @@ ynew = np.arange(0,720, 1)
 
 ###
 def scaleup(field):
-
-
-    u_lin=np.zeros((137, 360, 720, 4*24))
-    tmp=ds_lin[field][0:137,0:360:2,0:720:2,0:4*24]
-
+    
+    
+    u_lin=np.zeros((137, 360, 720, 74))
+    tmp=ds_lin[field][0:137,0:360:2,0:720:2,0:74]
+    
     start_time = time.time()
 
     for i in range(137):
-        for j in range(4*24):
-
+        for j in range(74):
+            
             fu = interpolate.interp2d(x, y, tmp[i,:,:,j].transpose(), kind='linear')
-
+            
             u_lin[i,:,:,j] = fu(xnew, ynew).transpose()
 
     print("--- %s seconds --- for linear" % (time.time() - start_time))
-
-    ds_lin[field][0:137,0:360,0:720,0:4*24]=u_lin
+    
+    ds_lin[field][0:137,0:360,0:720,0:74]=u_lin
 
 
 
 
 
 ###
-ds_lin_u = nc.Dataset('lin_eval_u.nc',"r+")
-ds_lin_v = nc.Dataset('lin_eval_v.nc',"r+")
+for n in range(4):
+    
+    ds_lin = nc.Dataset('lin_'+filenames[n],"r+")
+    
 
-for k in range(2):
-    if(k==0):
-        print('scale up u')
-        scaleup('u',ds_lin_u)
+    for k in range(2):
+        if(k==0):
+            print('scale up u')
+            scaleup('u')
+            
+        if(k==1):
+            print('scale up v')
+            scaleup('v')
 
-    if(k==1):
-        print('scale up v')
-        scaleup('v',ds_lin_v)
 
+    ds_lin.close()
+    
 
-ds_lin.close()
