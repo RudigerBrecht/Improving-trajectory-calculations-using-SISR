@@ -12,6 +12,7 @@ import time
 
 ###
 
+filenames=['nn_wind_orig_20000113140000','wind_orig_20000413050000.nc','wind_orig_20000712200000.nc','wind_orig_20001014140000.nc']
 
 def interval_mapping(image, from_min, from_max, to_min, to_max):
     # map values from [from_min, from_max] to [to_min, to_max]
@@ -23,16 +24,16 @@ def interval_mapping(image, from_min, from_max, to_min, to_max):
 
 ###
 
-def scaleup_50(model,field,ds):
+def scaleup_50(model,field):
     
     
-    u_nn=np.zeros((50, 360, 720, 4*24))
-    tmp=ds[field][0:50,0:360:2,0:720:2,0:4*24]
+    u_nn=np.zeros((50, 360, 720, 24))
+    tmp=ds_nn[field][0:50,0:360:2,0:720:2,0:24]
     
     start_time = time.time()
 
     for i in range(50):
-        for j in range(4*24):
+        for j in range(24):
             uin=tmp[i,:,:,j]
             mi=uin.min()
             ma=uin.max()
@@ -40,24 +41,24 @@ def scaleup_50(model,field,ds):
             
     print("--- %s seconds --- for 50" % (time.time() - start_time))
 
-    ds[field][0:50,0:360,0:720,0:4*24]=u_nn
+    ds_nn[field][0:50,0:360,0:720,0:24]=u_nn
     
 
 
     
     
     
-def scaleup_137(model,field,ds):
+def scaleup_137(model,field):
     
 
     
-    u_nn=np.zeros((87, 360, 720, 4*24))
-    tmp=ds[field][50:137,0:360:2,0:720:2,0:4*24]
+    u_nn=np.zeros((87, 360, 720, 24))
+    tmp=ds_nn[field][50:137,0:360:2,0:720:2,0:24]
     
     start_time = time.time()
     
     for i in range(87):
-        for j in range(4*24):
+        for j in range(24):
             uin=tmp[i,:,:,j]
             mi=uin.min()
             ma=uin.max()
@@ -65,36 +66,42 @@ def scaleup_137(model,field,ds):
 
     print("--- %s seconds --- for 137" % (time.time() - start_time))
 
-    ds[field][50:137,0:360,0:720,0:4*24]=u_nn
+    ds_nn[field][50:137,0:360,0:720,0:24]=u_nn
     
 
 
 ###
-ds_nn_u = nc.Dataset('nn_eval_u_m1.nc',"r+")
-ds_nn_v = nc.Dataset('nn_eval_v_m1.nc',"r+")
+for n in range(3):
+    ds_nn = nc.Dataset('nn_'+filenames[n],"r+")
+    
+    
 
+    for k in range(4):
+        if(k==0):
+            model = tf.keras.models.load_model('models/u_50') # model u_137 would give better results
+            print('scale up u 50')
+            scaleup_50(model,'u')
+            
+        if(k==1):
+            model = tf.keras.models.load_model('models/u_137')
+            print('scale up u 137')
+            scaleup_137(model,'u')
+            
+        if(k==2):
+            model = tf.keras.models.load_model('models/v_50')
+            print('scale up v 50')
+            scaleup_50(model,'v')
+            
+        if(k==3):
+            model = tf.keras.models.load_model('models/v_137')
+            print('scale up v 137')
+            scaleup_137(model,'v')
+            
 
-for k in range(4):
-    if(k==0):
-        model = tf.keras.models.load_model('../trained_nn_models/model_1_u_lvl050') 
-        print('scale up u 50')
-        scaleup_50(model,'u', ds_nn_u)
-        
-    if(k==1):
-        model = tf.keras.models.load_model('../trained_nn_models/model_1_u_lvl50137')
-        print('scale up u 137')
-        scaleup_137(model,'u', ds_nn_u)
-        
-    if(k==2):
-        model = tf.keras.models.load_model('../trained_nn_models/model_1_v_lvl050')
-        print('scale up v 50')
-        scaleup_50(model,'v', ds_nn_v)
-        
-    if(k==3):
-        model = tf.keras.models.load_model('../trained_nn_models/model_1_v_lvl50137')
-        print('scale up v 137')
-        scaleup_137(model,'v', ds_nn_v)
-        
+    ds_nn.close()
+                
+            
+            
+            
 
-ds_nn_u.close()
-ds_nn_v.close()
+    
