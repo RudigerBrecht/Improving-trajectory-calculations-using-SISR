@@ -27,13 +27,13 @@ def interval_mapping(image, from_min, from_max, to_min, to_max):
 def scaleup_50(model,field):
     
     
-    u_nn=np.zeros((50, 360, 720, 24))
-    tmp=ds_nn[field][0:50,0:360:2,0:720:2,0:24]
+    u_nn=np.zeros((50, 360, 720, 74))
+    tmp=ds_nn[field][0:50,0:360:2,0:720:2,0:74]
     
     start_time = time.time()
 
     for i in range(50):
-        for j in range(24):
+        for j in range(74):
             uin=tmp[i,:,:,j]
             mi=uin.min()
             ma=uin.max()
@@ -41,7 +41,7 @@ def scaleup_50(model,field):
             
     print("--- %s seconds --- for 50" % (time.time() - start_time))
 
-    ds_nn[field][0:50,0:360,0:720,0:24]=u_nn
+    ds_nn[field][0:50,0:360,0:720,0:74]=u_nn
     
 
 
@@ -52,13 +52,13 @@ def scaleup_137(model,field):
     
 
     
-    u_nn=np.zeros((87, 360, 720, 24))
-    tmp=ds_nn[field][50:137,0:360:2,0:720:2,0:24]
+    u_nn=np.zeros((87, 360, 720, 74))
+    tmp=ds_nn[field][50:137,0:360:2,0:720:2,0:74]
     
     start_time = time.time()
     
     for i in range(87):
-        for j in range(24):
+        for j in range(74):
             uin=tmp[i,:,:,j]
             mi=uin.min()
             ma=uin.max()
@@ -66,7 +66,7 @@ def scaleup_137(model,field):
 
     print("--- %s seconds --- for 137" % (time.time() - start_time))
 
-    ds_nn[field][50:137,0:360,0:720,0:24]=u_nn
+    ds_nn[field][50:137,0:360,0:720,0:74]=u_nn
     
 
 
@@ -78,30 +78,24 @@ for n in range(3):
 
     for k in range(4):
         if(k==0):
-            model = tf.keras.models.load_model('models/u_50') # model u_137 would give better results
+            model = tf.keras.models.load_model('../trained_nn_models/model_1_u_lvl050')
             print('scale up u 50')
             scaleup_50(model,'u')
             
         if(k==1):
-            model = tf.keras.models.load_model('models/u_137')
+            model = tf.keras.models.load_model('../trained_nn_models/model_1_u_lvl50137')
             print('scale up u 137')
             scaleup_137(model,'u')
             
         if(k==2):
-            model = tf.keras.models.load_model('models/v_50')
+            model = tf.keras.models.load_model('../trained_nn_models/model_1_v_lvl050')
             print('scale up v 50')
             scaleup_50(model,'v')
             
         if(k==3):
-            model = tf.keras.models.load_model('models/v_137')
+            model = tf.keras.models.load_model('../trained_nn_models/model_1_v_lvl50137')
             print('scale up v 137')
             scaleup_137(model,'v')
             
 
     ds_nn.close()
-                
-            
-            
-            
-
-    
