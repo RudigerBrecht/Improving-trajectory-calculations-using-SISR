@@ -12,6 +12,12 @@ import time
 
 ###
 
+unn=np.zeros((4,360,720))
+vnn=np.zeros((4,360,720))
+uref=np.zeros((4,360,720))
+vref=np.zeros((4,360,720))
+
+
 filenames=['nn_wind_orig_20000113140000','wind_orig_20000413050000.nc','wind_orig_20000712200000.nc','wind_orig_20001014140000.nc']
 
 def interval_mapping(image, from_min, from_max, to_min, to_max):
@@ -30,6 +36,9 @@ def scaleup_50(model,field):
     u_nn=np.zeros((50, 360, 720, 74))
     tmp=ds_nn[field][0:50,0:360:2,0:720:2,0:74]
     
+    save_field=np.zeros((360,720))
+    save_field_ref=np.zeros((360,720))
+    
     start_time = time.time()
 
     for i in range(50):
@@ -39,9 +48,15 @@ def scaleup_50(model,field):
             ma=uin.max()
             u_nn[i,:,:,j]=interval_mapping(model.predict(interval_mapping(uin[None,],mi,ma,-1,1))[0,:,:,0],-1,1,mi,ma)
             
+            if i==10 and j==0:
+                save_field=u_nn[i,:,:,j]
+                save_field_ref=uin
+            
     print("--- %s seconds --- for 50" % (time.time() - start_time))
 
     ds_nn[field][0:50,0:360,0:720,0:74]=u_nn
+    
+    return save_field, save_field_ref
     
 
 
@@ -80,7 +95,7 @@ for n in range(3):
         if(k==0):
             model = tf.keras.models.load_model('../trained_nn_models/model_1_u_lvl050')
             print('scale up u 50')
-            scaleup_50(model,'u')
+            unn[n,],uref[n,]=scaleup_50(model,'u')
             
         if(k==1):
             model = tf.keras.models.load_model('../trained_nn_models/model_1_u_lvl50137')
@@ -90,7 +105,7 @@ for n in range(3):
         if(k==2):
             model = tf.keras.models.load_model('../trained_nn_models/model_1_v_lvl050')
             print('scale up v 50')
-            scaleup_50(model,'v')
+            vnn[n,],vref[n,]=scaleup_50(model,'v')
             
         if(k==3):
             model = tf.keras.models.load_model('../trained_nn_models/model_1_v_lvl50137')
@@ -99,3 +114,8 @@ for n in range(3):
             
 
     ds_nn.close()
+    
+np.save('../data1/unn.npy','unn')
+np.save('../data1/vnn.npy','vnn')
+np.save('../data1/uref.npy','uref')
+np.save('../data1/vref.npy','vref')
