@@ -31,7 +31,7 @@ For the manuscript see ([link](https://egusphere.copernicus.org/preprints/2022/e
 Change Service (C3S) Climate Data Store. The results contain modified Copernicus Climate Change Service information. Neither the European Commission nor ECMWF is responsible for any use that may be made of the Copernicus information
 or data it contains.
 We used flex_extract to download the ERA5 re-analysis data. The documentation can be found here
-(https://www.flexpart.eu/flex_extract/ecmwf_data.html). Then we have files with the starting date and time as the name *wind_orig_year+month+day+time.nc*. Containing 137 leveles and 74 hours for the u,v,w velocity.
+(https://www.flexpart.eu/flex_extract/ecmwf_data.html). Then we have files in a folder *ERA_data* with the starting date and time as the name *wind_orig_year+month+day+time.nc*. Containing 137 leveles and 74 hours for the u,v,w velocity.
 
 2. Normalize the downloaded data using the scripts in the folder *preprocess_data*.
 
