@@ -16,8 +16,11 @@ def interval_mapping(image, from_min, from_max, to_min, to_max):
     scaled = np.array((image - from_min) / float(from_range), dtype=float)
     return to_min + (scaled * to_range)
 
-def rmse(xp,yp, xt,yt):
-    return np.sqrt(((xp - xt)**2+(yp - yt)**2).mean())
+def rmse(xp, xt):
+    return np.sqrt(((xp - xt)**2).mean())
+
+# def rmse(xp,yp, xt,yt):
+#     return np.sqrt(((xp - xt)**2+(yp - yt)**2).mean())
 
 def lininter(field,fin,fout):
     x = np.arange(0,360, fin)
@@ -55,10 +58,15 @@ uref=ds_ref['u'][0:136, 0:360,0:720,0:24]
 vref=ds_ref['v'][0:136, 0:360,0:720,0:24]
 
 ###
-rmse_lin=[0,0,0]
-rmse_nn4=[0,0,0]
-rmse_nn2=[0,0]
-rmse_nn1=0
+rmse_u_lin=[0,0,0]
+rmse_u_nn4=[0,0,0]
+rmse_u_nn2=[0,0]
+rmse_u_nn1=0
+
+rmse_v_lin=[0,0,0]
+rmse_v_nn4=[0,0,0]
+rmse_v_nn2=[0,0]
+rmse_v_nn1=0
 
 ssim_u_lin=[0,0,0]
 ssim_u_nn4=[0,0,0]
@@ -82,9 +90,13 @@ for i in range(136):
         vlin4_2=lininter(vref[i,0:360:4,0:720:4,t],4,2)
         vlin4_1=lininter(vref[i,0:360:2,0:720:2,t],2,1)
         
-        rmse_lin[0]+=rmse(ulin4_4,uref[i,0:360:4,0:720:4,t],vlin4_4,vref[i,0:360:4,0:720:4,t])/136/24
-        rmse_lin[1]+=rmse(ulin4_2,uref[i,0:360:2,0:720:2,t],vlin4_2,vref[i,0:360:2,0:720:2,t])/136/24
-        rmse_lin[2]+=rmse(ulin4_1,uref[i,0:360,0:720,t],vlin4_1,vref[i,0:360,0:720,t])/136/24
+        rmse_u_lin[0]+=rmse(ulin4_4,uref[i,0:360:4,0:720:4,t])/136/24
+        rmse_u_lin[1]+=rmse(ulin4_2,uref[i,0:360:2,0:720:2,t])/136/24
+        rmse_u_lin[2]+=rmse(ulin4_1,uref[i,0:360,0:720,t])/136/24
+        
+        rmse_v_lin[0]+=rmse(vlin4_4,vref[i,0:360:4,0:720:4,t])/136/24
+        rmse_v_lin[1]+=rmse(vlin4_2,vref[i,0:360:2,0:720:2,t])/136/24
+        rmse_v_lin[2]+=rmse(vlin4_1,vref[i,0:360,0:720,t])/136/24
         
         ##
         if i <=50:
@@ -102,9 +114,14 @@ for i in range(136):
             vnn4_2=modelinter(modelv4_50137,vref[i,0:360:4,0:720:4,t])
             vnn4_1=modelinter(modelv4_50137,vref[i,0:360:2,0:720:2,t])
         
-        rmse_nn4[0]+=rmse(unn4_4,uref[i,0:360:4,0:720:4,t],vnn4_4,vref[i,0:360:4,0:720:4,t])/136/24
-        rmse_nn4[1]+=rmse(unn4_2,uref[i,0:360:2,0:720:2,t],vnn4_2,vref[i,0:360:2,0:720:2,t])/136/24
-        rmse_nn4[2]+=rmse(unn4_1,uref[i,0:360,0:720,t],vnn4_1,vref[i,0:360,0:720,t])/136/24
+        rmse_u_nn4[0]+=rmse(unn4_4,uref[i,0:360:4,0:720:4,t])/136/24
+        rmse_u_nn4[1]+=rmse(unn4_2,uref[i,0:360:2,0:720:2,t])/136/24
+        rmse_u_nn4[2]+=rmse(unn4_1,uref[i,0:360,0:720,t])/136/24
+        
+        rmse_v_nn4[0]+=rmse(vnn4_4,vref[i,0:360:4,0:720:4,t])/136/24
+        rmse_v_nn4[1]+=rmse(vnn4_2,vref[i,0:360:2,0:720:2,t])/136/24
+        rmse_v_nn4[2]+=rmse(vnn4_1,vref[i,0:360,0:720,t])/136/24
+        
         ##
         if i <= 50:
             unn2_2=modelinter(modelu2_050,uref[i,0:360:4,0:720:4,t])
@@ -117,8 +134,12 @@ for i in range(136):
             vnn2_2=modelinter(modelv2_50137,vref[i,0:360:4,0:720:4,t])
             vnn2_1=modelinter(modelv2_50137,vref[i,0:360:2,0:720:2,t])
 
-        rmse_nn2[0]+=rmse(unn2_2,uref[i,0:360:2,0:720:2,t],vnn2_2,vref[i,0:360:2,0:720:2,t])/136/24
-        rmse_nn2[1]+=rmse(unn2_1,uref[i,0:360,0:720,t],vnn2_1,vref[i,0:360,0:720,t])/136/24
+        rmse_u_nn2[0]+=rmse(unn2_2,uref[i,0:360:2,0:720:2,t])/136/24
+        rmse_u_nn2[1]+=rmse(unn2_1,uref[i,0:360,0:720,t])/136/24
+        
+        rmse_v_nn2[0]+=rmse(vnn2_2,vref[i,0:360:2,0:720:2,t])/136/24
+        rmse_v_nn2[1]+=rmse(vnn2_1,vref[i,0:360,0:720,t])/136/24
+        
         ##
         if i <= 50:
             unn1_1=modelinter(modelu1_050,uref[i,0:360:2,0:720:2,t])
@@ -127,7 +148,9 @@ for i in range(136):
             unn1_1=modelinter(modelu1_50137,uref[i,0:360:2,0:720:2,t])
             vnn1_1=modelinter(modelv1_50137,vref[i,0:360:2,0:720:2,t])
         
-        rmse_nn1+=rmse(unn1_1,uref[i,0:360,0:720,t],vnn1_1,vref[i,0:360,0:720,t])/136/24
+        rmse_u_nn1+=rmse(unn1_1,uref[i,0:360,0:720,t])/136/24
+        rmse_v_nn1+=rmse(vnn1_1,vref[i,0:360,0:720,t])/136/24
+
         
     # ssim 
     
@@ -163,17 +186,22 @@ for i in range(136):
 
 ###
 
-np.save('rmse_lin',rmse_lin)
-np.save('rmse_nn4',rmse_nn4)
-np.save('rmse_nn2',rmse_nn2)
-np.save('rmse_nn1',rmse_nn1)
+np.save('../errdata/rmse_u_lin',rmse_u_lin)
+np.save('../errdata/rmse_u_nn4',rmse_u_nn4)
+np.save('../errdata/rmse_u_nn2',rmse_u_nn2)
+np.save('../errdata/rmse_u_nn1',rmse_u_nn1)
 
-np.save('ssim_u_lin',ssim_u_lin)
-np.save('ssim_u_nn4',ssim_u_nn4)
-np.save('ssim_u_nn2',ssim_u_nn2)
-np.save('ssim_u_nn1',ssim_u_nn1)
+np.save('../errdata/rmse_v_lin',rmse_v_lin)
+np.save('../errdata/rmse_v_nn4',rmse_v_nn4)
+np.save('../errdata/rmse_v_nn2',rmse_v_nn2)
+np.save('../errdata/rmse_v_nn1',rmse_v_nn1)
 
-np.save('ssim_v_lin',ssim_v_lin)
-np.save('ssim_v_nn4',ssim_v_nn4)
-np.save('ssim_v_nn2',ssim_v_nn2)
-np.save('ssim_v_nn1',ssim_v_nn1)
+np.save('../errdata/ssim_u_lin',ssim_u_lin)
+np.save('../errdata/ssim_u_nn4',ssim_u_nn4)
+np.save('../errdata/ssim_u_nn2',ssim_u_nn2)
+np.save('../errdata/ssim_u_nn1',ssim_u_nn1)
+
+np.save('../errdata/ssim_v_lin',ssim_v_lin)
+np.save('../errdata/ssim_v_nn4',ssim_v_nn4)
+np.save('../errdata/ssim_v_nn2',ssim_v_nn2)
+np.save('../errdata/ssim_v_nn1',ssim_v_nn1)
