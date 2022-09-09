@@ -12,7 +12,7 @@ def mynormalize(x):
 
 udata=np.zeros((137,360,720,75*3),dtype=np.float32)
 
-ds = nc.Dataset('wind_orig_20000101000000.nc')
+ds = nc.Dataset('../ERA_data/wind_orig_20000101000000.nc')
 u1=ds['u'][0:137,0:360,0:720,0:75]
 
 for i in range(137):
@@ -21,7 +21,7 @@ for i in range(137):
 
 udata[:,:,:,0:75]=u1
 
-ds = nc.Dataset('wind_orig_20000104050000.nc')
+ds = nc.Dataset('../ERA_data/wind_orig_20000104050000.nc')
 u1=ds['u'][0:137,0:360,0:720,0:75]
 
 for i in range(137):
@@ -31,7 +31,7 @@ for i in range(137):
 udata[:,:,:,75:150]=u1
         
     
-ds = nc.Dataset('wind_orig_20000107080000.nc')
+ds = nc.Dataset('../ERA_data/wind_orig_20000107080000.nc')
 u1=ds['u'][0:137,0:360,0:720,0:75]
 
 for i in range(137):
@@ -49,7 +49,7 @@ np.save('normalized_train_u_50_137',udata[50:137,])
 
 udata=np.zeros((137,360,720,75*3),dtype=np.float32)
 
-ds = nc.Dataset('wind_orig_20000101000000.nc')
+ds = nc.Dataset('../ERA_data/wind_orig_20000101000000.nc')
 u1=ds['v'][0:137,0:360,0:720,0:75]
 
 for i in range(137):
@@ -58,7 +58,7 @@ for i in range(137):
 
 udata[:,:,:,0:75]=u1
 
-ds = nc.Dataset('wind_orig_20000104050000.nc')
+ds = nc.Dataset('../ERA_data/wind_orig_20000104050000.nc')
 u1=ds['v'][0:137,0:360,0:720,0:75]
 
 for i in range(137):
@@ -68,7 +68,7 @@ for i in range(137):
 udata[:,:,:,75:150]=u1
         
     
-ds = nc.Dataset('wind_orig_20000107080000.nc')
+ds = nc.Dataset('../ERA_data/wind_orig_20000107080000.nc')
 u1=ds['v'][0:137,0:360,0:720,0:75]
 
 for i in range(137):
@@ -84,7 +84,7 @@ np.save('normalized_train_v_50_137',udata[50:137,])
 
 ###
 
-ds = nc.Dataset('wind_orig_20000113140000.nc')
+ds = nc.Dataset('../ERA_data/wind_orig_20000113140000.nc')
 u1=ds['u'][0:137,0:360,0:720,0:10]
 for i in range(137):
     for j in range(10):
@@ -94,7 +94,7 @@ np.save('normalized_val_u',udata)
 
 ###
 
-ds = nc.Dataset('wind_orig_20000113140000.nc')
+ds = nc.Dataset('../ERA_data/wind_orig_20000113140000.nc')
 u1=ds['v'][0:137,0:360,0:720,0:10]
 for i in range(137):
     for j in range(10):
