@@ -93,22 +93,22 @@ for n in range(3):
 
     for k in range(4):
         if(k==0):
-            model = tf.keras.models.load_model('../trained_nn_models/model_1_u_lvl050')
+            model = tf.keras.models.load_model('../trained_nn_models/model_2_u_lvl050')
             print('scale up u 50')
             unn[n,],uref[n,]=scaleup_50(model,'u')
             
         if(k==1):
-            model = tf.keras.models.load_model('../trained_nn_models/model_1_u_lvl50137')
+            model = tf.keras.models.load_model('../trained_nn_models/model_2_u_lvl50137')
             print('scale up u 137')
             scaleup_137(model,'u')
             
         if(k==2):
-            model = tf.keras.models.load_model('../trained_nn_models/model_1_v_lvl050')
+            model = tf.keras.models.load_model('../trained_nn_models/model_2_v_lvl050')
             print('scale up v 50')
             vnn[n,],vref[n,]=scaleup_50(model,'v')
             
         if(k==3):
-            model = tf.keras.models.load_model('../trained_nn_models/model_1_v_lvl50137')
+            model = tf.keras.models.load_model('../trained_nn_models/model_2_v_lvl50137')
             print('scale up v 137')
             scaleup_137(model,'v')
             
