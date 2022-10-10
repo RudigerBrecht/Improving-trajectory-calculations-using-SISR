@@ -14,7 +14,7 @@ from scipy import interpolate
 
 ###
 
-filenames=['lin_data_eval_jan.nc','lin_data_eval_apr.nc','lin_data_eval_jul.nc','lin_data_eval_oct']
+filenames=['data_eval_jan.nc','data_eval_apr.nc','data_eval_jul.nc','data_eval_oct']
 
 x = np.arange(0,360, 2)
 y = np.arange(0,720, 2)
@@ -125,7 +125,7 @@ def scaleup(field):
 ###
 for n in range(4):
     
-    ds_lin = nc.Dataset('lin_2_'+filenames[n],"r+")
+    ds_lin = nc.Dataset('lin_'+filenames[n],"r+")
     
 
     for k in range(2):
