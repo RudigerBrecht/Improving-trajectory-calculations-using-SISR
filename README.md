@@ -27,11 +27,7 @@ For the manuscript see ([link](https://egusphere.copernicus.org/preprints/2022/e
 
 # Reproducing the results
 
-1. Download the ERA5 re-analysis data from the Copernicus Climate
-Change Service (C3S) Climate Data Store. The results contain modified Copernicus Climate Change Service information. Neither the European Commission nor ECMWF is responsible for any use that may be made of the Copernicus information
-or data it contains.
-We used flex_extract to download the ERA5 re-analysis data. The documentation can be found here
-(https://www.flexpart.eu/flex_extract/ecmwf_data.html). Then we have files in a folder *ERA_data* with the starting date and time as the name *wind_orig_year+month+day+time.nc*. Containing 137 leveles and 74 hours for the u,v,w velocity.
+1. Download the ERA5 re-analysis data using the scripts in the folder *download_ear5_data*. Then, convert the *.grip files to *.nc files using ``` grib_to_netcdf -T ***.grib -o ***.nc ```
 
 2. Normalize the downloaded data using the scripts in the folder *preprocess_data*.
 
@@ -39,15 +35,15 @@ We used flex_extract to download the ERA5 re-analysis data. The documentation ca
 
 4. To interpolate the data first copy the evaluation data as follows:
 ```
-cp wind_orig_20000113140000.nc /interpolate_data/nn_wind_orig_20000113140000.nc
-cp wind_orig_20000113140000.nc /interpolate_data/nn_wind_orig_20000413050000.nc
-cp wind_orig_20000116170000.nc /interpolate_data/nn_wind_orig_20000712200000.nc
-cp wind_orig_20000119200000.nc /interpolate_data/nn_wind_orig_20001014140000.nc
+cp download_ear5_data/data_eval_jan.nc /interpolate_data/nn_data_eval_jan.nc
+cp download_ear5_data/data_eval_apr.nc /interpolate_data/nn_data_eval_apr.nc
+cp download_ear5_data/data_eval_jul.nc /interpolate_data/nn_data_eval_jul.nc
+cp download_ear5_data/data_eval_oct.nc /interpolate_data/nn_data_eval_oct.nc
 
-cp wind_orig_20000113140000.nc /interpolate_data/lin_wind_orig_20000113140000.nc
-cp wind_orig_20000113140000.nc /interpolate_data/lin_wind_orig_20000413050000.nc
-cp wind_orig_20000116170000.nc /interpolate_data/lin_wind_orig_20000712200000.nc
-cp wind_orig_20000119200000.nc /interpolate_data/lin_wind_orig_20001014140000.nc
+cp download_ear5_data/data_eval_jan.nc /interpolate_data/lin_data_eval_jan.nc
+cp download_ear5_data/data_eval_apr.nc /interpolate_data/lin_data_eval_apr.nc
+cp download_ear5_data/data_eval_jul.nc /interpolate_data/lin_data_eval_jul.nc
+cp download_ear5_data/data_eval_oct.nc /interpolate_data/lin_data_eval_oct.nc
 ```
 Then interpolate the data using the scripts in the folder *interpolate_data*.
 
