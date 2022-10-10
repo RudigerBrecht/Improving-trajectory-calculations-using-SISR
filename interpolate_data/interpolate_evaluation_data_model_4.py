@@ -18,7 +18,7 @@ uref=np.zeros((4,360,720))
 vref=np.zeros((4,360,720))
 
 
-filenames=['nn_wind_orig_20000113140000','wind_orig_20000413050000.nc','wind_orig_20000712200000.nc','wind_orig_20001014140000.nc']
+filenames=['data_eval_jan.nc','data_eval_apr.nc','data_eval_jul.nc','data_eval_oct']
 
 def interval_mapping(image, from_min, from_max, to_min, to_max):
     # map values from [from_min, from_max] to [to_min, to_max]
@@ -87,7 +87,7 @@ def scaleup_137(model,field):
 
 ###
 for n in range(3):
-    ds_nn = nc.Dataset('nn_'+filenames[n],"r+")
+    ds_nn = nc.Dataset('nn2_'+filenames[n],"r+")
     
     
 
