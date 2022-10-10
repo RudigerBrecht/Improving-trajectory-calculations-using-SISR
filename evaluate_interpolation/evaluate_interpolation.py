@@ -53,7 +53,7 @@ modelv4_050 = tf.keras.models.load_model('../trained_nn_models/model_4_v_lvl050'
 modelv4_50137 = tf.keras.models.load_model('../trained_nn_models/model_4_v_lvl50137')
 
 ###
-ds_ref = nc.Dataset('wind_orig_20000113140000.nc')
+ds_ref = nc.Dataset('download_ear5_data/data_eval_jan.nc')
 uref=ds_ref['u'][0:136, 0:360,0:720,0:24]
 vref=ds_ref['v'][0:136, 0:360,0:720,0:24]
 
@@ -186,22 +186,22 @@ for i in range(136):
 
 ###
 
-np.save('../errdata/rmse_u_lin',rmse_u_lin)
-np.save('../errdata/rmse_u_nn4',rmse_u_nn4)
-np.save('../errdata/rmse_u_nn2',rmse_u_nn2)
-np.save('../errdata/rmse_u_nn1',rmse_u_nn1)
+np.save('../errdata/rmse_u_lin_jan',rmse_u_lin)
+np.save('../errdata/rmse_u_nn4_jan',rmse_u_nn4)
+np.save('../errdata/rmse_u_nn2_jan',rmse_u_nn2)
+np.save('../errdata/rmse_u_nn1_jan',rmse_u_nn1)
 
-np.save('../errdata/rmse_v_lin',rmse_v_lin)
-np.save('../errdata/rmse_v_nn4',rmse_v_nn4)
-np.save('../errdata/rmse_v_nn2',rmse_v_nn2)
-np.save('../errdata/rmse_v_nn1',rmse_v_nn1)
+np.save('../errdata/rmse_v_lin_jan',rmse_v_lin)
+np.save('../errdata/rmse_v_nn4_jan',rmse_v_nn4)
+np.save('../errdata/rmse_v_nn2_jan',rmse_v_nn2)
+np.save('../errdata/rmse_v_nn1_jan',rmse_v_nn1)
 
-np.save('../errdata/ssim_u_lin',ssim_u_lin)
-np.save('../errdata/ssim_u_nn4',ssim_u_nn4)
-np.save('../errdata/ssim_u_nn2',ssim_u_nn2)
-np.save('../errdata/ssim_u_nn1',ssim_u_nn1)
+np.save('../errdata/ssim_u_lin_jan',ssim_u_lin)
+np.save('../errdata/ssim_u_nn4_jan',ssim_u_nn4)
+np.save('../errdata/ssim_u_nn2_jan',ssim_u_nn2)
+np.save('../errdata/ssim_u_nn1_jan',ssim_u_nn1)
 
-np.save('../errdata/ssim_v_lin',ssim_v_lin)
-np.save('../errdata/ssim_v_nn4',ssim_v_nn4)
-np.save('../errdata/ssim_v_nn2',ssim_v_nn2)
-np.save('../errdata/ssim_v_nn1',ssim_v_nn1)
+np.save('../errdata/ssim_v_lin_jan',ssim_v_lin)
+np.save('../errdata/ssim_v_nn4_jan',ssim_v_nn4)
+np.save('../errdata/ssim_v_nn2_jan',ssim_v_nn2)
+np.save('../errdata/ssim_v_nn1_jan',ssim_v_nn1)
