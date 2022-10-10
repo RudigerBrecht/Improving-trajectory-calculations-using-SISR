@@ -14,7 +14,7 @@ from scipy import interpolate
 
 ###
 
-filenames=['wind_orig_20000113140000.nc','wind_orig_20000413050000.nc','wind_orig_20000712200000.nc','wind_orig_20001014140000']
+filenames=['lin_data_eval_jan.nc','lin_data_eval_apr.nc','lin_data_eval_jul.nc','lin_data_eval_oct']
 
 x = np.arange(0,360, 2)
 y = np.arange(0,720, 2)
