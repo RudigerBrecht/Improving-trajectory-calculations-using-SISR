@@ -18,7 +18,7 @@ uref=np.zeros((4,360,720))
 vref=np.zeros((4,360,720))
 
 
-filenames=['nn_wind_orig_20000113140000','wind_orig_20000413050000.nc','wind_orig_20000712200000.nc','wind_orig_20001014140000.nc']
+filenames=['lin_data_eval_jan.nc','lin_data_eval_apr.nc','lin_data_eval_jul.nc','lin_data_eval_oct']
 
 def interval_mapping(image, from_min, from_max, to_min, to_max):
     # map values from [from_min, from_max] to [to_min, to_max]
