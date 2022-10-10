@@ -40,6 +40,11 @@ cp download_ear5_data/data_eval_apr.nc /interpolate_data/nn_data_eval_apr.nc
 cp download_ear5_data/data_eval_jul.nc /interpolate_data/nn_data_eval_jul.nc
 cp download_ear5_data/data_eval_oct.nc /interpolate_data/nn_data_eval_oct.nc
 
+cp download_ear5_data/data_eval_jan.nc /interpolate_data/nn2_data_eval_jan.nc
+cp download_ear5_data/data_eval_apr.nc /interpolate_data/nn2_data_eval_apr.nc
+cp download_ear5_data/data_eval_jul.nc /interpolate_data/nn2_data_eval_jul.nc
+cp download_ear5_data/data_eval_oct.nc /interpolate_data/nn2_data_eval_oct.nc
+
 cp download_ear5_data/data_eval_jan.nc /interpolate_data/lin_data_eval_jan.nc
 cp download_ear5_data/data_eval_apr.nc /interpolate_data/lin_data_eval_apr.nc
 cp download_ear5_data/data_eval_jul.nc /interpolate_data/lin_data_eval_jul.nc
