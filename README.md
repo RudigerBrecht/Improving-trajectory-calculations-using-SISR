@@ -52,8 +52,12 @@ cp download_ear5_data/data_eval_oct.nc /interpolate_data/lin_data_eval_oct.nc
 ```
 Then interpolate the data using the scripts in the folder *interpolate_data*.
 
+For model 2 the interpolated files can be found here: https://zenodo.org/record/7318809.
+
+For model 4 the interpolated files can be found here: https://zenodo.org/record/7277854.
+
 5. Evaluate the interpolated data using the scripts in the folder *evaluate_interpolation*
 
-6. Then we used the Lagrangian transport and dispersion model FLEXPART 10.4 ([link](https://www.flexpart.eu/)) to advect particles on the interpolated data. We switched off all turbulence and convection parameterizations and used FLEXPART as a simple trajectory model.
+6. Then we used the Lagrangian transport and dispersion model FLEXPART (see folder *FLEXPART*) to advect particles on the interpolated data. We switched off all turbulence and convection parameterizations and used FLEXPART as a simple trajectory model.
 
 7. Plot the resluts using the jupyter notebook with the data from [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.6628749.svg)](https://doi.org/10.5281/zenodo.6628749).
