@@ -19,7 +19,7 @@ At the bottom of the par_mod.f90 file, an array containing the names of the inte
 	XXX should be replaced by the timestamps of the filenames of the desired Season.
 	Neural network interpolated velocity fields can be found in:
 	 - Model 2: https://zenodo.org/record/7318809
-	 - Model 4: 
+	 - Model 4: https://zenodo.org/record/7277854
 	Linear interpolated fields can be obtained by following the instructions in the README.md in https://zenodo.org/record/7065139
 Run 'make' in the directory and it should compile an executable called 'FLEXPART'
 
